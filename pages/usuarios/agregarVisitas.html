@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/"
+    data-template="vertical-menu-template-free">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Visitantes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="../../css/styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script async defer src="https://apis.google.com/js/api.js" id="gapi"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" id="gis"></script>
+
+
+</head>
+
+<body>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu iZQUIERDO -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+                    <a href="#" class="app-brand-link">
+                        <span class="app-brand-logo demo">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP4AAADHCAMAAAAOPR4GAAAAllBMVEX///8qNIsjLokaJ4YoMooTIoULHYNaYaEXJIaqrcsgLIgiLYhiaKV4fbEHG4OdocQAEoEAF4K5vNZ9gbPd3uzT1eWVmcCeocNpbqkvOY/q6/RRV5prcalydqo7Q5JIT5f29voAAHzFx9ymqcmLj7rk5e+/wdg1PpDMzuDw8fdXXZ+ytdGDh7VETJeQlL1NVJoAC4AAAIFKrq0nAAAaQklEQVR4nO1diZayOLdlCIiogDhUiRM4I079/i93MwEnyhBKy+q+v3utXv1pCckmyZkTFOWDDz74X8bI/ZKDe/jrrhYhkOz911e78Pq1p0uiPwjfS00Ca8OS7L1xLbxB21Jlodu7N7OrwXZpSndeOxbeou10JIFU1O/Gb2ZYhfFNw7Qke69PC++x637LYbbA88Q2kjdzLMWI9AeZrZlk/0/PNrhx8NM2j9tXdP5ZhKc+wqOh+W9sc7TXVbVjum9ssgSrCe4JcmZvXosnD0sA4zx8b6v3CGcOGXr9/ZL4gPBj1/qbtzcMkBg2Hvr+LPyLxgdk0enqnxlBwdFRXzn0yWUsg0tK+EDXnTcPX9R+M7hOh6z6tPVAqu8YpTecmU2tPjYB7HdKXY7h0iBNo3To15J9163SW/ZsWasva3VFJAA2goJf5yvi0tdIu+nQD68mkus60krvOTdsKWCZ73xzTRP2qNq11r9POcdhb5Gh11b8M7VDNLnO66V3dedS6F3xvLOt1HFaaXgCqOb0bUZQOHCEoT9M8MNA5rQn1/3nO/BFpp455TM+nJEJoPXLhcpLsaOPW9f50IdzOv2cd9rgWzIBNC+1+lY60b/WfvT7LcddwhYPPf/sU9VvvtsDc008AYwFt/qY9aV5T3sTdUhMIp6zVR+0mOp/v/u1nZrE8U2tvp1G+zVZVV70bJtHkw59L2Sfv5jq//4T53tNJoC154RjOgFyM+QX4Jod8ohV3iJT/fZfWB0UbAI46Vj4lk1n4i91Z3Q2hKHfMPn/Sl9vgCb1QGkHSHxQI0KYE467ZCUi51eMoBPRNvmqXxFtBw3+L5muq/uw5PYUPR1JQM8HOLjSCdDiQ0BdMKyFXm4EHVSi7fDQs49M1+aqXxniqSEDtZL+QM7sxXyzAV6TBWk73AiKu1Q4mcuXBgLCuYdU4F2yp6yjTM6ePDmbF00q6c9vpgTwtAMDzCRAZvUlVAJo/cvr2Ps6G3ruaW2PbI1la5A5HoZEzx2rkv5wJIO10cF8r9kA0wmgOdzqwxKADIW1eJERxAwdrFP50HP5n6nY4Ju6nZOdVN9f0SOqfzUnG+CAToCMsE+MQDxap/AFbbUtdrMB+8jlv5fde23ZYGa8CW0sh7GVm0V61lQLOdzq4xNAV58OxOCVpcJVf3I0OBOI7hc+vwtU5GuZEmYTIDdJEmKPEYMsLLleDmPKFnl86FdM/ue2NdWG6PbrtnYB6IrXrUwHrqkFmsYd4xYNQDzliY2oW58NfUwXOfCsVrb+Lk+rAMHRFIycgFrkWfqnbbIJcPypEXTyNCbh0/tRIeCkXgZ7Gprzd7HmNtG/tpnpQKISVDV9IOxx/DQbQvMX+XKi6hWIV9wWdbLPrx16X683enMzmzIERk7QYhOAPxDqFGGN3NwIYkGMXLmP6VTKlc2QpnRhiGVcb/SiWT19s95yhP512+jAbvEpnxoF2ysV3I1nqG8LQz9aUG2XJ5WYuwOSTIeFhNFrf9c3bMjYjma+oOmAAx3IpnxmBLlsAQMdWY+A6U3k8aEf0I/5UDN3R+tniyrsOTJGb6eefhLVm446Ujt529gGIBMg14HUDcwE8pbaKcBRrcWayrgsmrdjJq9x5lY1DywYyyy26ltyRq/Xqm07ljAcv/DUgzMPKznSXSPVgcwGyEJfTHmruj12ZcBC9qnAD5jJmw912yEPp+N8pa0HLYflWuo7/iI/jEU6QXqTqgCgA5kKSJfukE8AuTSMBlc9mwm5Q8XzGWDx3eW63gOXBbqyBR10yQTIRD6XANghZ0pi3JdMwnDZwlcKlu9UdWa3pckdkGPgLkBmbL4NdAJAT4M6usAPZCogDX0NF5Zs5VCnk4Z0NpRsPvQrZgXmkyxkRq+8WHkhXLKk82wfX4O5DuQTwOSRkfFMGsyb43ZPp8+Hnok8WFS0QzThgd499AxbEmmFYeaEqABkZe5Xm/o9wCpsAE4WZbkkFuHBQ582x9zKzB36A7hk7tlmthKZCsgnI58Amc6SBzPw83tz+8k2gIdFA14vr64Igzrkv2UTwLxm9FioK4+FMhpYB8oWH1Ckys9MQ6gX7v1kZSxDHvUGQ1/bb7mI+CHqV8ODFhxVAcAA47HOLOMftNiwSRYfQOVnW3yVHya04BTImY0nRj0UknatQSQXFTjU1odqMLTEVICRe15sAuQ6kH1ujEyoxNz7yeX7ij4O1Ad8mAKshC4XfK2nT7INIIxFVYDmZJ2JqQrIdSBWCXKVB0IVQpq7auvM+8nkOxeKQpSDxcBeQn8VeTWgmQ2QysFmPbHp8qnIpLRmpg0mM7nKA4ATG3rm5hP5HvJ78dCnB3zIFdKJEVrTa8nJX48R0ciCPqM1xSDpEtPEczM/rwjMysNDn96HawBrkg99/O0goCDfAVLRhczc5+J+HdBLLBGf+aw/wgHzJrMoX+RcA8BiSuoCaT+yLX6OlU0a9cByoioAGKRpsPvHVYcxy2wBqUrrCEmAK/fcqAuEjHcOPQWr54DyZ8vS7ZnEVxKW7TCa6bwMzMrTzDTIwTVAFkghoItDc/6itDp5SK9QFQCMoNRw/Rmo9jMyFypJox750NP6tp9EEl8CZtLCVA6rt8gHjKe7fox8XFlZixDbDHusvuFNBWUFYGEtB5RVUS8ALNfwWypnXIx+No9YoFdwHhIaDbUWrx/6+LvSH/3O5e6W7CNR7X6+N2zLjfFMWMsljSvTsTzbA0zr1JkC2n87r+x0V14FB45dGY6wgJt16SNhvZPIjiao6mcRDrgGAG24Hkty54LX7Vf3uS9fcRRYNfYzSDKyfS3Cohze1SA9B1bEia2sLLZJDHwV5JMVag3VdNloQL9mQ6MtOlsnFngG5Qwstqu/YHsRNelgwCuNcAk9oCqn2qn05PsS1njjc0f0t1YaL2fIvhmeqU9mLqdPgt5Z7QCjbqcKlS4K1zfY5XIre/1CEekbYpyXFVoJAdcxNU+1Z0GXGghr89lg26AlYm5CMfD7CEhRBbDFsYnPstl59nO4l98UWwnNy4ee5hOEzUt4nuHnkRa8vQ0Xj5o82TOPmV1imwn4ifUCONds6FlaV7XzkgrWDdt4/0a2kaqLipdns4GQGraTp9GGVFkDXXGG5RHBtyKckbEATg9PZkLr5IXgAb8sAKjwoX+3r5sjMTTR+b70uYv6ckuUbRnKkyYK37msWr+ykXTZKscx47ul+g1MAGYDvb7gJmG2TydPKXBrI3/2w4oet6YNTdCoShsBP2PjiZ1gO/tgqucF4EVCMKDFIh+2lrUyduyKHvcb5sG8Sl0EvEy6jQdOgBWLa2M34PgqWB2mAHOZQh8yqBrc1sS5zYb0oypdhHtjnLMsa5fVMmQTIGSWiYqetnlScIGSaRS6exqvhEwIujdNRXpFj28N6bvrCsxoQWe2DJnGAxNg91yQowggxMU8QOwAZvWEpPAVmZeKHrsv3WRIKniBuh0uWK1pFviMu33jpXBy+c4LW/PHQQsJ9LeWdrJIf76pgwk8UMO+81+L9L5cAeZsaU7x3bUteIGbQsaVzXdQ3/c7oBsXYGKXRpNR//37+L6o0Z9pnvhIU/u/EXvLEM6Zu2elJn5Icwn6/i/OUBkhWxgIl8WkvF+bALzAL5c5O6pj3+7tcTCVl3vaI1aM87JdLHetffMsR2ris7JfrUEU69X4YtU12XiTMBBxQupSxD9BnypTK9P+TAxYy3entyDoAlBzi4Q6Qb8HYF0zu+9vD46hC0CFTud2+aIYTxHs7LgGts461t+UtEF8sUB/Jo82N+eXcMtM/A0VA8b033Bs2shmtTyp7t0Ofwu8gSF19H9RxTRDyHYtPbtrSxZjj8V6f3fvWujcSmTwbX8fWXTpZLT1NyzFLcvwmN1Q/D44lXXXi36kiCelHjRyzndEmQYQSs1+B/TQlMdwYnxy9FKJab6YPnkAS3HuMQ2g6ovBr2JqsO28IqF4Y+gVnf0ZfcMrKY90dFq5fRc/YwsANa/ga4K70lZG/mLp9Oia0nLOH9EvL44dO8y9Owr3PdgvD3IUTjxQTIARMvKaNxuWdXcrPK0XIO6xDJ7Tgv5dOJU9NuwJGHvBpRwbzA168W7GOgyPbHOZ14W9WcttVnoCYyjzQrdP17ylvt/tWZ3ZPhtv9kcnloauTrKbSLf+5sjQRKVVIHa/9xcPYK3R1jvO4K9M35CtPCx0B+92O9fIYlXu3b88LDUe0BojpJundz6A9oRtDDQXf31a+rbF9L1unH5b7GWYpLsi/w0HRR8WLAPXcL/KE6AWnv3Ko3GeQoJ+McZRDM2Z/2WU6w6upf+utXuHO4PzzxFvem/E/F/2eoAPPvj/htG1qmDmv4DjM2Vfo/7LKjT+CMYzxsFI/n0n/1Loz2x1OVSW+PwX8FQyIFi3/+NY/7VP9MEHH3zwwQcffPDBBx988MEHH3zwwQcvRVh7VmOclGyhWh2Gj6lUuE9rpygj8POyBuAlBfE3cedXEj7+YttsyxdH4J+OC9t0+qa+v/baZaUgw6hsC53pGGjqitctzPzPKtlInn28ldVYqfkl/ceTwoOb0GZUcBe/tIcChGvaS9PQNVbwiZBmW85+XJgXHzoVwXKk6c5+Hea/XuZ7NtBCUcZ5PS3qlzzgRV51aj++EHEsVuRqBW8Jlzs6HkHy9uPeEqT3vwseQCV9ep0F3jRVTh/fv3iRVdPf35XkOo+1Yk3pD/clu5rt22Psv5Y+3T8e1tNXtUVz+of71gvO1WxIv30r31Vkne8ngAR93O99XE9f1QtfAVFJf35fDYwmT9If96t+1tHvikOk6Kv2VYK+ahYllqrox4+HZD1uuG9EP6lkT2ayyF+OvsoTptX0VadAcFfRbz9WRtkPU6gJ/WFtavZOREnSR/1Agj4yH8V/Ff3r4zJFxr0EbUJ/Wr+bsHP9AX1V30jQx5ryQfxX0B8WzdSH1zo3oL+qmfoUwnk3An1w7AS6W5Xs/nX01c6yAf1N0TYcdK6iX7Z1hb1hu9sRvtR0yzANy767CL6LHNJHi2WGheqI22T6Wxn6j+K/gn7xJqT+nXCG9EuPN9UI/VB4EwYyz5tktdqtZ7ooYuD8gvQNaJOHw41wEiAVyfX01fs3UZXT3xXLKfvutQOQvuWHZcC/XMEbovwEndAVRhLtS+jfKR0f3o6+FUSCvuqJpYfl9FtATsHu3b03EtKvPqJM6I4OLZxt3gDSHT03LavoK2fQQd2VpK+K4r+UfgCOCNKOoCVDrNeWpw/fp6qLW7y3zMLAlv9kAxdXJf0TuJ/06KviS19L6bvAXzJj8HKpO79Hnn4Pdveu5h23pmHu92c3VtKfAUkqu/YJTdj/Uvqq8Ado/nqC3/Mz+vqdCAod51xwiE8lfeg6eYE0fdUC0quMPnwZAn608KPo98jTh5MVqXcWiF+476iCftwCg8/8OUn6KvCRy+iD4UYq/gy0M9J/Rt8VHNCJL7HVCdLXx6sMfnsmbM402k3oq/1M65TQD4G3Q8XUBdxL8HsgfXvjF5/tSJe0oPjIm9r2rVMyqtz9IFh9Oggeie8VoQPUgD4y07lWQr8NSDlEFkMLuNMtoa/axUWMNzrbwvuX8yFs95nG/nhqH0oegqTN761q6YveRua4l9AH3o7GzNwlmP0mmLcyNj9/Vdl3p+BviD0ENPPDH9JH6euxKujvv8WpYB+r6AtrjgnpNTBN4f7MBvQP5S4PQrZRsO1Shj6y073TFaFOVbmKoRvjVEF/A5U+61QMbGwEAmcN6Cutyr3kyH54j5cU/SxEVkEfKeGdP8beTV9MHziUGp8mgr/m5KZZE/pB1WkGBPpEnABSk19LT0arpK9sxRArcg5l9KG3k9m48Es7P4+rCX1sPtSdMS9Gu+REX3o4RzV9ZSSKXkTcjkL6YKCREfIvQw1craffNqOvjOoOjEQmVAKy0R6nJtrDwiG+KHuIrVREPwA/A8E96LLkfk8z+uTAyOqIlxDtkqWv0nPu6+grrng7vVtI3y02cUbg4tzvaUgfWz9LT78PVkGA08Tvgl0PL4gBcEIJ+spJ7KxxuRbQh2fDwNATzPn0UxklBruKIdDHQsg9m6alP0Ts+D1Kwh1oDzHRTEGOkt0x9fSV7p36h//m9GFux4Z+OZwVmcMuBLu04r3N/Yd9W/GofWntdcfQ7Ye1ANRKabDrIdxFCErQv1f/BfShY6rCJ76AzWkF9K0kjAsR3tPnD2Hou7Ol5ojpFLDNqdLhFcNxWGXI0A/VMtHD6YsRSbVsvZm7R/o/O48/HK738Ilr+Tupq+krMxhAWUvRL3+/C6efyO1617o/ph8/+vYwowJi6TX0YVftgRx9ZVTy6mVOf1ljmaTw4h/Rj5OW0334dgUlSJ5HraG/A1dhN1SOvuIXH3TO6EurWu4KNaIfJ0fH0HK1kQGaGmgSStKHQQhNmr6yLqTI6BfmdorAbylPP2hPPYuda/5QawD3pQLNV00/hNKoM5Omr2yKbBVGv8oiEWEemtAfXTH3rKmsIoMDahuUZ+Iq6W+vMH6gX+TpK7OCMab0S3I7RWCPS6BfcS5icBOu1YRI9wW2CvwpSN8+wW2gX6erKagwK2lAv0j9UzrdoohMMViyG9LXrt0yiFkjcvF+cwhCUtx3cMVXBYE8iiCIhEjag7nkbJvQDycP6p/QD+o8UghqywpGb9l+ddt+jPUg3TTQZIJM0XoVfD5pOUwFRgP6Beqf0HfhOBSd+AMnDV2k8vn91sPEKnBdxECqPH0S6m5C//HWhD60a/XT+HKPsaAYnGET+oEcF5hBl6ZPQ92N6Cu7O/MH0xd82vtCBoal8IAaVXf4JfaWAKECQZY+8kaN6d+rf0xfyEJ+FVwiRnyRFjaq7fm6j/Q/QhNK56RLm6hL2ZD+nfrH9KHgc4pTDwGMGJp+s8K2r7rx1zShVclYH383XFP6ovq3e4ISOxZeIapG7Jw1K2vcGZWxvp9EelH2CtLG9AX13zkdwdgYZafOCYZRP9g1oq/ErfIJAN/nJ0kfdcw8V96cPlT/aAlNgVtYfIUSwlIs3V01o4+du71zX8xFoZmTB5t56JWffdOxdcO0uuCas54bGntyWqxgdxQitvN3ZsG3ZxVXAFOc8ttq9sR3JI7pEZs/zEzDFjQ+6ljOscBh2B5Lzchu9+TuxKUyB3/E3W+3BKuzGMP8R9BkPZYfrTKEfWqNYSPlEG8R7gYL3TGI8UqK+0x1lvyLjvl7C+LhLmmvv77WSVl6+4MPPvifxek4PZKjhjcXZTidTr+xMRKcaYx1TYIi24HukHe4d6/TVms6PQbH43R6PpCXQtjmlW5fOKn8Vj2aBk7odrUFSwkP54bVWmGNSZTO7tjXNuTWLWpIuOQnISI5B94iaRTffkbc/Jg0tKS6qkv+5SrjLCG0WkSI3CLU6MXkDUWjc0jv2SOnWBNJ52Jec2ZZbQeWSd9D/0VuLqq/4+ywmjuhMh8oo2i3SjxX2UZUUo6nuKFofhiNo7FyWB2+p4fVahslq9UqwL+drUbrG75/qGv8jtOI/MMlgcSV3qePIhocDuNopJAf9qL1aNWNsA+LbsR/OhFlldBabN4ixuZ8WK0naqwEUZs2hKFvcMNDZZBaCqPI3bZJKCCxEb2YaGeWuNTxk1toxJca4N6uEdmEtIt6hAN+Xid883EkBMxaF8zgn4PSI/Tx58sy7Yx7JH1g7ZFLTt95R0NeS0XGdOFypTttkZIkl0RZv92FT/ZI0qbwl56vrGlhpHLSFUXtTtL7XRNSBAHo0wzM8YqbzkwOfijzKaXvpp7yda0dUvobkrc+RKEy7CeL7NfLjMMhOigb4mbMhNpSQn+EW0/pd0+A/oUHjHutO/prLbtBdxxEIe/NvMvoh9H2Czc1yLJJmD5iXlPY9xXdv57Y/fClg/kj/WG0jQF9X6S/4wMYRPFmntIfklv08E82M+WfYfrrURRf+MPCfaP054K52Z2cz2QoCf3++ayiENDv8jeu+HZG35sN5r4yzx4h6eaeDc/VDb2E0k/2pG/KOXMWPD9M35Qx3WA+AR4Lcj+3pYy88IG+Eu3iPm6I3VdtDXoXQF8ZR1e6lJfK8BZy+sp+rYSk/g7/N9ukv8atdrnISBxls9xu/UgwN1uz0aHtDdnorw6H6QzQnw0e6N9cchTgPDMy24sgvrDA+XWMByZeY/rHTRzv28o5K84F9K8bMpvXDr3fYh0Hzq6Q/m2cnjmIeu12AuljuRvhnu3dOEB+Sr+9V3YWnuReECc6pM+HMDGVjeHdojvRRx4OlnuUfkhnVE7f5UJ91lXuJr+XXj91oqjP9nlh+krv2F4oQb8fReZSGWTJFjz59yytHN52dDFPB+Nv7HB5+IfdB/qHyslPMIpGWw+34nRT+mEUfGMuPdwfzzvwX6+i2OXhne9vKmwnYqk3pd/tZfSHhH7M6Ye3MbvJSLkXffSZbkcB/bx3U/oKOp6ZbMKyaxvR70cBoe9HtPB2PmGyLL4dZ8qGPFbcYhBlLzaj9PctQfRx+umCoztXbofLUeHdZc+ue8GTWKFdnfUY/VCd4YZoJ3a4+VOL/D+E9FtdP5nja6jia/trmzzOdZIkWxcrvsM/3d3qFFGpNehS+uRvIzw+x8Q/Ra5L5/2azpLzmA7LgixDjOUFK76Z78+jRPmHTN5ovPKv1pYrKT+aKSYlprUD1iKhv/CT0+0aYvou/orOfn3gJ4mvDK6knpn8pu/uuihkT2WyTi9e3XBf/H/YeCmnpZ8MoiP98L3bUQ6EvrIQ3mF56rZac/zUXJe9zBv/KpjPZ7Pvg0/mRbC5LntsC8Sa2hjkbzNiG22m18FIOdGlFHfJAGxof75OYZeO5Q5PkOHgOt1gWtTqOMyW0zF59j3KauNu2cvM2peYtYj/ncxn8w0R7OwrqrMGpMmT0ib/o1N6PV2eYn5xkl9MLJox0y+zIf71/MI1xOZ6HQxp10gvrv+G19l98MEf4v8AWSk4Bsb2IMAAAAAASUVORK5CYII="
+                                alt="Logo" class="logo-img">
+                        </span>
+                    </a>
+                </div>
+                <br>
+                <div class="menu-inner-shadow"></div>
+
+                <ul class="menu-inner py-1">
+                    <!-- Menus -->
+                    <li class="menu-item active">
+                        <a href="../../index.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Inicio</div>
+                        </a>
+                    </li>
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Control de Visitas</span>
+                    </li>
+
+                </ul>
+            </aside>
+
+            <div class="layout-page">
+                <!-- Navbar -->
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-nav-right d-flex align-items-center justify-content-center" id="navbar-collapse">
+                        <!-- Título -->
+                        <div class="navbar-nav align-items-center">
+                            <div class="nav-item text-center">
+                                <h5 class="text-black fw-bold mb-0">Lectores</h5>
+                            </div>
+                        </div>
+                        <!-- /Título -->
+                    </div>
+                </nav>
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <ul class="nav nav-tabs mb-4">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#registro">Registro</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#otroFormulario">Usuarios</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="registro" class="tab-pane fade show active">
+                                <div class="card h-100">
+                                    <div class="card-body">
+
+                                        <form  action="https://script.google.com/macros/s/AKfycbwKx1o1icHpTk5E7IpU3E-FggCQ5w_SmjbbTDCAHE0/dev" method="POST">
+                                            <div class="card-title mb-0">
+                                                <h6 class="m-0 me-2"><i class="fas fa-user"></i> Datos Personales</h6>
+
+                                            </div>
+                                            <br>
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" style="font-size: 12px;"
+                                                            for="fecha"><i class="fas fa-calendar-alt"></i>
+                                                            Fecha</label>
+                                                        <input type="date" id="fecha" name="fecha" class="form-control"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" style="font-size: 12px;"
+                                                            for="nombreUsuario"><i
+                                                                class="fas fa-user"></i>Encargado</label>
+                                                        <input type="text" id="nombreUsuario" name="nombreUsuario"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" style="font-size: 12px;"
+                                                            for="nacionalidad"><i class="fas fa-globe-americas"></i>
+                                                            Nacionalidad</label>
+                                                        <select id="nacionalidad" name="nacionalidad"
+                                                            class="responsive-combobox" required>
+                                                            <option value="" disabled selected>Seleccionar</option>
+                                                            <option value="Nacional">Nacional</option>
+                                                            <option value="Extranjero">Extranjero</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col" id="paisContainer" style="display:none;">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" style="font-size: 12px;" for="pais"><i
+                                                                class="fas fa-flag"></i> País</label>
+                                                        <input type="text" id="pais" name="pais" class="form-control"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" style="font-size: 12px;"
+                                                            for="documento"><i class="fas fa-id-card"></i>
+                                                            Documento</label>
+                                                        <select id="tipoDocu" name="tipoDocu"
+                                                            class="responsive-combobox" required>
+                                                            <option value="" disabled selected>Seleccionar</option>
+                                                            <option value="Dui">DUI</option>
+                                                            <option value="Llave del saber">llave del saber</option>
+                                                            <option value="Otros">Otros</option>
+
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" style="font-size: 12px;"
+                                                            for="numDocu"><i class="fas fa-file-alt"></i> N°
+                                                            Documento</label>
+                                                        <input type="text" id="numDocu" name="numDocu"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" style="font-size: 12px;"
+                                                            for="numlector">Num Lectores</label>
+                                                        <select id="numlector" name="numlector"
+                                                            class="responsive-combobox">
+                                                            <option value="0">Seleccionar</option>
+                                                            <option value="1">1 Lector</option>
+                                                            <option value="2">2 Lectores</option>
+                                                            <option value="3">3 Lectores</option>
+                                                            <option value="4">4 Lectores</option>
+                                                            <option value="5">5 Lectores</option>
+                                                            <option value="6">6 Lectores</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-outline">
+                                                    <div id="lectoresContainer"></div>
+                                                </div>
+
+                                            </div>
+
+                                            <button type="submit"
+                                                class="btn btn-primary btn-block mb-4">Procesar</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="otroFormulario" class="tab-pane fade">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+
+                                                <tbody>
+                                                    <div class="form-outline">
+                                                        <div id="sheetData"></div>
+                                                    </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tercerFormulario" class="tab-pane fade">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <form action="tercerformulario.php" method="POST">
+                                            <!-- Contenido del tercer formulario -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="cuartoFormulario" class="tab-pane fade">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <form action="cuartoformulario.php" method="POST">
+                                            <!-- Contenido del cuarto formulario -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Footer -->
+                    <footer class="content-footer footer bg-footer-theme">
+                        <div
+                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                            <div class="mb-2 mb-md-0">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear());
+                                </script>
+                                ,The_Alexander & Jefferson.J
+
+                            </div>
+
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+    <script src="../../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/dashboards-analytics.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="../../javascript/nacionalidad.js"></script>
+    <script src="../../javascript/jugadores.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('.nav-tabs a').forEach(function (tab) {
+                tab.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var target = this.getAttribute("href");
+                    document.querySelectorAll('.tab-pane').forEach(function (pane) {
+                        pane.classList.remove('show', 'active');
+                    });
+                    document.querySelector(target).classList.add('show', 'active');
+                });
+            });
+        });
+    </script>
+
+    <script>
+        const select = document.getElementById('numlector');
+        const container = document.getElementById('lectoresContainer');
+
+        select.addEventListener('change', function () {
+            const numLectores = parseInt(this.value);
+            container.innerHTML = '';
+
+            for (let i = 0; i < numLectores; i++) {
+                const div = document.createElement('div');
+                div.classList.add('row', 'mb-4');
+                div.innerHTML = `
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label" style="font-size: 12px;" for="nombreLector${i + 1}">Nombre del Lector ${i + 1}</label>
+                            <input type="text" id="nombreLector${i + 1}" name="nombreLector${i + 1}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label" style="font-size: 12px;" for="libro${i + 1}">Libro ${i + 1}</label>
+                            <input type="text" id="libro${i + 1}" name="libro${i + 1}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label" style="font-size: 12px;" for="isbn${i + 1}">ISBN ${i + 1}</label>
+                            <input type="text" id="isbn${i + 1}" name="isbn${i + 1}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label" style="font-size: 12px;" for="tiempoInicio${i + 1}">Inicio ${i + 1}</label>
+                            <input type="time" id="tiempoInicio${i + 1}" name="tiempoInicio${i + 1}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label" style="font-size: 12px;" for="finalizacion${i + 1}">Finalizacion ${i + 1}</label>
+                            <input type="time" id="finalizacion${i + 1}" name="finalizacion${i + 1}" class="form-control" />
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            }
+        });
+    </script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="../../javascript/mostrardatos.js"></script>
+    
+        
+        
+    
+</body>
+
+</html>
